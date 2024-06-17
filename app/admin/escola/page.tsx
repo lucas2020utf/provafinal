@@ -6,7 +6,7 @@ export default function Escola() {
     return (
         <div className="w-full flex flex-col  mt-6">
             <div className="flex justify-center mb-6">
-                <a href="/admin/course/new">
+                <a href="/admin/escola/new">
                     <Button>Cadastrar Escola</Button>
                 </a>
             </div>

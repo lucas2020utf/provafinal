@@ -1,3 +1,4 @@
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -39,7 +40,7 @@ export default function SaveEscola() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(Escola)
         }
-        const response = await fetch("https://apiserver20241-nine.vercel.app/escola", requestOptions)
+        const response = await fetch("https://serverkuki.vercel.app/escolas", requestOptions)
         form.reset();
         alert("Estudante Cadastrado!")
     }
@@ -60,7 +61,7 @@ export default function SaveEscola() {
                         </FormItem>
                     )}
                 />
-                <FormField
+                {/* <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
@@ -72,7 +73,7 @@ export default function SaveEscola() {
                             <FormMessage />
                         </FormItem>
                     )}
-                />
+                /> */}
                 <Button type="submit">Salvar</Button>
             </form>
         </Form>

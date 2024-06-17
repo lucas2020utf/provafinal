@@ -20,14 +20,14 @@ import { revalidatePath } from "next/cache"
     const courses = await list()
     async function list(){
       revalidatePath("/admin/escola")
-      const response = await fetch("https://apiserver20241-nine.vercel.app/escola")
+      const response = await fetch("https://serverkuki.vercel.app/escolas")
         return response.json();
     }
 
     async function deleteEscola(formData: FormData) {
       "use server"
       const id = formData.get("id") as string;
-      const response = await fetch("https://apiserver20241-nine.vercel.app/escola/"+id, {method: "DELETE"});
+      const response = await fetch("https://serverkuki.vercel.app/escolas/"+id, {method: "DELETE"});
       revalidatePath("/admin/escola")
   
     }

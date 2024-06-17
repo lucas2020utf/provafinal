@@ -1,3 +1,4 @@
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -16,20 +17,21 @@ import {
 import { Input } from "@/components/ui/input"
 
 const FormSchema = z.object({
-    name: z.string().min(2, {
+    titulo: z.string().min(2, {
         message: "Necessário mais que dois caracteres.",
     }),
-    email: z.string().email({
-        message: "Digite o email correto"
-    }),
+    // email: z.string().email({
+    //     message: "Digite o email correto"
+    // }),
+    descricao: z.string()
 })
 
 export default function SaveLivro() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: { //valor que aparece por padrão
-            name: "Genilso",
-            email: "genilso@gmail.com",
+            titulo: "Genilso",
+            descricao: "genilsogmail.com",
         },
     })
 
@@ -39,7 +41,7 @@ export default function SaveLivro() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(livro)
         }
-        const response = await fetch("https://apiserver20241-nine.vercel.app/livro", requestOptions)
+        const response = await fetch("https://apiserver20241-nine.vercel.app/livros", requestOptions)
         form.reset();
         alert("Estudante Cadastrado!")
     }
@@ -49,12 +51,12 @@ export default function SaveLivro() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
                 <FormField
                     control={form.control}
-                    name="name"
+                    name="titulo"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Nome:</FormLabel>
+                            <FormLabel>Nome do livro:</FormLabel>
                             <FormControl>
-                                <Input placeholder="Digite o nome do estudante" {...field} />
+                                <Input placeholder="Digite o nome do livro" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -62,12 +64,12 @@ export default function SaveLivro() {
                 />
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="descricao"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email:</FormLabel>
+                            <FormLabel>Descricao:</FormLabel>
                             <FormControl>
-                                <Input placeholder="Digite o email do estudante" {...field} />
+                                <Input placeholder="Digite a descrição" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
