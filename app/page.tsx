@@ -1,7 +1,9 @@
 export default function Home() {
   return (
     
-    <a href="/admin">Login</a>
+    <a href="/admin">
+      <button>Login</button>
+      </a>
     
 
   );

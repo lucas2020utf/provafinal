@@ -11,24 +11,24 @@ import {
   } from "@/components/ui/table"
 import { revalidatePath } from "next/cache"
 
-  interface IBoock{
+  interface ILivro{
     id:number,
     name:string,
   }
   
-  export default async function ListBoock() {
-    const boocks = await list()
+  export default async function ListLivro() {
+    const livros = await list()
     async function list(){
-      revalidatePath("/admin/boock")
+      revalidatePath("/admin/livro")
       const response = await fetch("https://server20241-six.vercel.app/courses")
         return response.json();
     }
 
-    async function deleteBoock(formData: FormData) {
+    async function deleteLivro(formData: FormData) {
       "use server"
       const id = formData.get("id") as string;
       const response = await fetch("https://server20241-six.vercel.app/courses/"+id, {method: "DELETE"});
-      revalidatePath("/admin/boock")
+      revalidatePath("/admin/livro")
   
     }
 
@@ -43,14 +43,14 @@ import { revalidatePath } from "next/cache"
           </TableRow>
         </TableHeader>
         <TableBody>
-          {boocks.map((item:IBoock) => (
+          {livros.map((item:ILivro) => (
             <TableRow key={item.id}>
               <TableCell className="font-medium">{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>
               <form>
                 <input type="text" hidden name="id" value={item.id} />
-                <Button variant="destructive" formAction={deleteBoock}>EXCLUIR</Button>
+                <Button variant="destructive" formAction={deleteLivro}>EXCLUIR</Button>
               </form>
             </TableCell>
             </TableRow>

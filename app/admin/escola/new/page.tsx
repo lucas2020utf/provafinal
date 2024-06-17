@@ -24,7 +24,7 @@ const FormSchema = z.object({
     }),
 })
 
-export default function SaveSools() {
+export default function SaveEscola() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: { //valor que aparece por padrão
@@ -33,13 +33,13 @@ export default function SaveSools() {
         },
     })
 
-    async function onSubmit(shool: z.infer<typeof FormSchema>) {
+    async function onSubmit(Escola: z.infer<typeof FormSchema>) {
         const requestOptions= {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(shool)
+            body: JSON.stringify(Escola)
         }
-        const response = await fetch("https://server20241-six.vercel.app/boocks", requestOptions)
+        const response = await fetch("https://apiserver20241-nine.vercel.app/escola", requestOptions)
         form.reset();
         alert("Estudante Cadastrado!")
     }

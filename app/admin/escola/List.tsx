@@ -11,24 +11,24 @@ import {
   } from "@/components/ui/table"
 import { revalidatePath } from "next/cache"
 
-  interface ISchool{
+  interface IEscola{
     id:number,
     name:string,
   }
   
-  export default async function ListSchool() {
+  export default async function ListEscola() {
     const courses = await list()
     async function list(){
-      revalidatePath("/admin/course")
-      const response = await fetch("https://server20241-six.vercel.app/courses")
+      revalidatePath("/admin/escola")
+      const response = await fetch("https://apiserver20241-nine.vercel.app/escola")
         return response.json();
     }
 
-    async function deleteSchool(formData: FormData) {
+    async function deleteEscola(formData: FormData) {
       "use server"
       const id = formData.get("id") as string;
-      const response = await fetch("https://server20241-six.vercel.app/courses/"+id, {method: "DELETE"});
-      revalidatePath("/admin/school")
+      const response = await fetch("https://apiserver20241-nine.vercel.app/escola/"+id, {method: "DELETE"});
+      revalidatePath("/admin/escola")
   
     }
 
@@ -43,17 +43,18 @@ import { revalidatePath } from "next/cache"
           </TableRow>
         </TableHeader>
         <TableBody>
-          {courses.map((item:ISchool) => (
+          {courses.map((item:IEscola) => (
             <TableRow key={item.id}>
               <TableCell className="font-medium">{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>
               <form>
                 <input type="text" hidden name="id" value={item.id} />
-                <Button variant="destructive" formAction={deleteSchool}>EXCLUIR</Button>
+                <Button variant="destructive" formAction={deleteEscola}>EXCLUIR</Button>
               </form>
             </TableCell>
             </TableRow>
+
           ))}
         </TableBody>
        
