@@ -30,7 +30,7 @@ export default function Aside({ className }: any) {
                 <a href="/admin">
                     <Button variant="ghost">
                         <BookAIcon className="mr-2" />
-                        Conta
+                        Livro
                     </Button>
                 </a>
             </div>
